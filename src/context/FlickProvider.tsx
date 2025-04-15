@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React, { createContext, useContext, useMemo } from "react";
-import { httpClient } from "../api/httpClient";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { createContext, useContext, useMemo } from 'react';
+import { httpClient } from '../api/httpClient';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +19,7 @@ const FlickContext = createContext<PaymentProviderConfig | null>(null);
 
 export type FlickProviderProps = {
   children: React.ReactNode;
-  environment: "production";
+  environment: 'production';
   apiKey: string;
   onError?: (error: Error) => void;
   onSuccess?: (data: any) => void;
@@ -51,7 +51,7 @@ export const FlickProvider = ({
 export const useFlick = () => {
   const context = useContext(FlickContext);
   if (!context) {
-    throw new Error("Component  must be used within a FlickProvider");
+    throw new Error('Component  must be used within a FlickProvider');
   }
   return context;
 };

@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import {
   Dimensions,
   FlatList,
   Image,
   Modal,
   SafeAreaView,
-  StyleProp,
+  type StyleProp,
   StyleSheet,
   Text,
   TextInput,
-  TextStyle,
+  type TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle,
-} from "react-native";
-import { Bank, BankList } from "../../types";
+  type ViewStyle,
+} from 'react-native';
+import { type Bank, type BankList } from '../../types';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export const BankSelector = ({
   selectedBank,
@@ -43,11 +43,11 @@ export const BankSelector = ({
         disabled={disabled}
       >
         <Image
-          source={{ uri: selectedBank.media[0].source }}
+          source={{ uri: selectedBank.media[0]?.source }}
           style={styles.bankLogo}
         />
         <Image
-          source={require("../../assets/chevron-down.png")}
+          source={require('../../assets/chevron-down.png')}
           style={styles.chevronIcon}
         />
       </TouchableOpacity>
@@ -75,11 +75,11 @@ const BankSelectionModal = ({
   selectedBank: Bank;
   onBankSelect: (bank: Bank) => void;
 }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("personal");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('personal');
 
   const filteredBanks =
-    activeTab === "personal"
+    activeTab === 'personal'
       ? banks.personalBanks.filter((bank) =>
           bank.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
@@ -126,26 +126,26 @@ const TabSelector = ({
 }) => (
   <View style={styles.tabContainer}>
     <TouchableOpacity
-      style={[styles.tab, activeTab === "personal" && styles.activeTab]}
-      onPress={() => setActiveTab("personal")}
+      style={[styles.tab, activeTab === 'personal' && styles.activeTab]}
+      onPress={() => setActiveTab('personal')}
     >
       <Text
         style={[
           styles.tabText,
-          activeTab === "personal" && styles.activeTabText,
+          activeTab === 'personal' && styles.activeTabText,
         ]}
       >
         Personal
       </Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={[styles.tab, activeTab === "business" && styles.activeTab]}
-      onPress={() => setActiveTab("business")}
+      style={[styles.tab, activeTab === 'business' && styles.activeTab]}
+      onPress={() => setActiveTab('business')}
     >
       <Text
         style={[
           styles.tabText,
-          activeTab === "business" && styles.activeTabText,
+          activeTab === 'business' && styles.activeTabText,
         ]}
       >
         Business
@@ -174,13 +174,13 @@ const BanksList = ({
         style={[
           styles.bankCard,
           selectedBank?.id === item.id && styles.selectedBankCard,
-          { width: "33.33%" },
+          { width: '33.33%' },
         ]}
         onPress={() => onBankSelect(item)}
       >
         <Image
-          source={{ uri: item.media[1].source }}
-          style={{ width: 40, height: 40, borderRadius: "100%" }}
+          source={{ uri: item.media[1]?.source }}
+          style={{ width: 40, height: 40, borderRadius: '100%' }}
           resizeMode="contain"
         />
         <Text style={styles.bankName} numberOfLines={1}>
@@ -216,7 +216,7 @@ const ModalFooter = () => (
   <View style={styles.bottomSheetFooter}>
     <Text style={styles.footerText}>Powered by</Text>
     <Image
-      source={require("../../assets/Flick.png")}
+      source={require('../../assets/Flick.png')}
       style={styles.flickLogo}
     />
   </View>
@@ -235,21 +235,21 @@ const SearchBox = ({
       placeholder="Search.."
       value={value}
       onChangeText={onChangeText}
-      placeholderTextColor={"#666"}
+      placeholderTextColor={'#666'}
     />
   </View>
 );
 
 const styles = StyleSheet.create({
   bankSelector: {
-    backgroundColor: "#E9F5F4",
+    backgroundColor: '#E9F5F4',
     padding: 12,
     borderRadius: 100,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
     borderWidth: 1,
-    borderColor: "#E0E0E0",
+    borderColor: '#E0E0E0',
   },
   bankLogo: {
     width: 24,
@@ -259,17 +259,17 @@ const styles = StyleSheet.create({
   chevronIcon: {
     width: 16,
     height: 16,
-    tintColor: "#666",
+    tintColor: '#666',
   },
   footer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 4,
   },
   footerText: {
     fontSize: 12,
-    color: "#666666",
+    color: '#666666',
   },
   flickLogo: {
     width: 40,
@@ -277,11 +277,11 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "flex-end",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
   },
   bottomSheet: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     height: SCREEN_HEIGHT * 0.7,
@@ -292,26 +292,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottomSheetHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 24,
   },
   bottomSheetTitle: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#228985",
+    fontWeight: '600',
+    color: '#228985',
   },
   closeButton: {
     padding: 8,
   },
   closeButtonText: {
     fontSize: 24,
-    color: "#666",
+    color: '#666',
   },
   tabContainer: {
-    flexDirection: "row",
-    backgroundColor: "#F5F5F5",
+    flexDirection: 'row',
+    backgroundColor: '#F5F5F5',
     borderRadius: 100,
     padding: 4,
     marginBottom: 24,
@@ -319,25 +319,25 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1,
     paddingVertical: 12,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 100,
   },
   activeTab: {
-    backgroundColor: "#2A9D8F",
+    backgroundColor: '#2A9D8F',
   },
   tabText: {
     fontSize: 16,
-    color: "#666",
-    fontWeight: "500",
+    color: '#666',
+    fontWeight: '500',
   },
   activeTabText: {
-    color: "white",
+    color: 'white',
   },
   searchContainer: {
     marginBottom: 24,
   },
   searchInput: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: '#F5F5F5',
     padding: 16,
     borderRadius: 100,
     fontSize: 16,
@@ -353,30 +353,30 @@ const styles = StyleSheet.create({
   bankCard: {
     aspectRatio: 1,
     padding: 16,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: '#F5F5F5',
     borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   selectedBankCard: {
-    borderColor: "#2A9D8F",
+    borderColor: '#2A9D8F',
     borderWidth: 2,
   },
   bankName: {
     fontSize: 10,
-    color: "#1A1A1A",
-    textAlign: "center",
+    color: '#1A1A1A',
+    textAlign: 'center',
     marginTop: 2,
   },
   bottomSheetFooter: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 16,
     gap: 4,
   },
   findMoreButton: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 16,
   },
 });

@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { httpClient } from "../api/httpClient";
-import { CheckoutResponse, InitiateCheckout } from "../types";
+import { useQuery } from '@tanstack/react-query';
+import { httpClient } from '../api/httpClient';
+import type { CheckoutResponse, InitiateCheckout } from '../types';
 
 const useCreateSession = (data: InitiateCheckout) => {
   return useQuery({
-    queryKey: ["initialize-session", data],
+    queryKey: ['initialize-session', data],
     staleTime: 1000,
     queryFn: () => {
       return httpClient.post<CheckoutResponse>(

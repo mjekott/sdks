@@ -6,11 +6,11 @@ export type InitiateCheckout = {
 
 export type FLickButtonProps = {
   config: InitiateCheckout;
-}
+};
 
 export interface MediaItem {
   source: string;
-  type: "icon" | "logo";
+  type: 'icon' | 'logo';
 }
 
 export interface Bank {
@@ -28,7 +28,7 @@ export interface BankList {
 export interface CheckoutData {
   transactionId: string;
   amount: string;
-  currency: "GBP" | "EUR";
+  currency: 'GBP' | 'EUR';
   charges: number;
   redirectUrl: string;
   webhookUrl: string;
@@ -41,7 +41,7 @@ export interface CheckoutResponse {
   data: CheckoutData;
 }
 
-export type Currency = "GBP" | "EUR" | "USD";
+export type Currency = 'GBP' | 'EUR' | 'USD';
 
 export interface GetInstitutions {
   status: number;
@@ -89,7 +89,7 @@ export interface Bank {
   name: string;
   media: MediaItem[];
   countryCode: string;
-  type: "personal" | "business";
+  type: 'personal' | 'business';
 }
 
 export interface BankList {
@@ -128,7 +128,7 @@ export interface AuthorizationResponse {
   };
 }
 
-export type BankTabType = "personal" | "business";
+export type BankTabType = 'personal' | 'business';
 
 export interface FlickContextType {
   customerBank?: Bank;

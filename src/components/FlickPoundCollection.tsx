@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
-import { Linking } from "react-native";
-import { useFlick } from "../context/FlickProvider";
-import useCheckTransactionStatus from "../hooks/useCheckTransactionStatus";
-import useGetAuthorizationLink from "../hooks/useGetAuthorizationLink";
-import useCreateSession from "../hooks/useInitializeSession";
-import { type Bank, type FLickButtonProps } from "../types";
-import { formatAmount } from "../utils";
-import AppLayout from "./ui/AppLayout";
-import { BankSelector } from "./ui/BankList";
-import CustomButton from "./ui/CustomButton";
+import { useEffect, useState } from 'react';
+import { Linking } from 'react-native';
+import { useFlick } from '../context/FlickProvider';
+import useCheckTransactionStatus from '../hooks/useCheckTransactionStatus';
+import useGetAuthorizationLink from '../hooks/useGetAuthorizationLink';
+import useCreateSession from '../hooks/useInitializeSession';
+import { type Bank, type FLickButtonProps } from '../types';
+import { formatAmount } from '../utils';
+import AppLayout from './ui/AppLayout';
+import { BankSelector } from './ui/BankList';
+import CustomButton from './ui/CustomButton';
 
-export const FlickPoundCollection = ({
-  config,
-}: FLickButtonProps) => {
+export const FlickPoundCollection = ({ config }: FLickButtonProps) => {
   const { onError, onSuccess } = useFlick();
-  const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
+  const [selectedBank, setSelectedBank] = useState<Bank>();
   const [isLoading, setIsLoading] = useState(false);
   const getAuthorizationLink = useGetAuthorizationLink();
-  const [transactionConfirmed, setTransactionConfirmed] = useState("");
+  const [transactionConfirmed, setTransactionConfirmed] = useState('');
 
   const { data, isLoading: isLoadingSession } = useCreateSession(config);
   const checkTransactionStatus = useCheckTransactionStatus(
@@ -36,17 +34,17 @@ export const FlickPoundCollection = ({
 
     if (
       !transactionData ||
-      transactionData?.description === "Awaiting Payer Authorization"
+      transactionData?.description === 'Awaiting Payer Authorization'
     )
       return;
 
-    if (transactionData?.description === "Awaiting Validation By Payer Bank") {
+    if (transactionData?.description === 'Awaiting Validation By Payer Bank') {
       setIsLoading(false);
-      setTransactionConfirmed("Payment Initiated");
+      setTransactionConfirmed('Payment Initiated');
       onSuccess?.(transactionData);
-    } else if (transactionData?.transaction_status === "failed") {
+    } else if (transactionData?.transaction_status === 'failed') {
       setIsLoading(false);
-      setTransactionConfirmed("Payment Failed");
+      setTransactionConfirmed('Payment Failed');
       onError?.(new Error(transactionData?.description));
     }
   }, [checkTransactionStatus.data]);
