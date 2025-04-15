@@ -1,6 +1,6 @@
 {
   "name": "react-native-flick-react-native-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "a payment sdk",
   "source": "./src/index.ts",
   "main": "./lib/module/index.js",
