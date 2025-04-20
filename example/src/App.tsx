@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { FlickEuro, FlickProvider } from 'react-native-flick-react-native-sdk';
+import { FlickPound, FlickProvider } from 'react-native-flick-react-native-sdk';
 export default function App() {
   const handleError = (error: any) => {
     console.log(error);
@@ -17,14 +17,10 @@ export default function App() {
         onError={handleError}
         onSuccess={handleSuccess}
       >
-        <FlickEuro
+        <FlickPound
           config={{
             amount: 1000,
             cust_email: 'ekottmfon@outlook.com',
-            currency: 'EUR',
-            iban: 'DE89370400440532013000',
-            full_name: 'Ekott Mfon',
-            country: 'DE',
           }}
         />
       </FlickProvider>
