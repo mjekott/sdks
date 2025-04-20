@@ -23,13 +23,16 @@ export const BankSelector = ({
   bankList,
   setSelectedBank,
   disabled,
+  visible,
+  setVisible,
 }: {
-  selectedBank: Bank;
+  selectedBank: Bank | undefined;
   bankList: BankList;
   setSelectedBank: (bank: Bank) => void;
   disabled?: boolean;
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
 }) => {
-  const [visible, setVisible] = useState(false);
   const onBankSelect = (bank: Bank) => {
     setSelectedBank(bank);
     setVisible(false);
@@ -37,20 +40,22 @@ export const BankSelector = ({
 
   return (
     <>
-      <TouchableOpacity
-        style={styles.bankSelector}
-        onPress={() => setVisible(true)}
-        disabled={disabled}
-      >
-        <Image
-          source={{ uri: selectedBank.media[0]?.source }}
-          style={styles.bankLogo}
-        />
-        <Image
-          source={require('../../assets/chevron-down.png')}
-          style={styles.chevronIcon}
-        />
-      </TouchableOpacity>
+      {selectedBank && (
+        <TouchableOpacity
+          style={styles.bankSelector}
+          onPress={() => setVisible(true)}
+          disabled={disabled}
+        >
+          <Image
+            source={{ uri: selectedBank.media[0]?.source }}
+            style={styles.bankLogo}
+          />
+          <Image
+            source={require('../../assets/chevron-down.png')}
+            style={styles.chevronIcon}
+          />
+        </TouchableOpacity>
+      )}
       <BankSelectionModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -72,7 +77,7 @@ const BankSelectionModal = ({
   visible: boolean;
   onClose: () => void;
   banks: BankList;
-  selectedBank: Bank;
+  selectedBank: Bank | undefined;
   onBankSelect: (bank: Bank) => void;
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -160,7 +165,7 @@ const BanksList = ({
   onBankSelect,
 }: {
   banks: Bank[];
-  selectedBank: Bank;
+  selectedBank: Bank | undefined;
   onBankSelect: (bank: Bank) => void;
 }) => (
   <FlatList

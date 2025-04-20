@@ -4,27 +4,33 @@ import { useFlick } from '../context/FlickProvider';
 import useCheckTransactionStatus from '../hooks/useCheckTransactionStatus';
 import useGetAuthorizationLink from '../hooks/useGetAuthorizationLink';
 import useCreateSession from '../hooks/useInitializeSession';
-import { type Bank, type FLickButtonProps } from '../types';
+import { type Bank, type FLickPoundButtonProps } from '../types';
 import { formatAmount } from '../utils';
 import AppLayout from './ui/AppLayout';
 import { BankSelector } from './ui/BankList';
 import CustomButton from './ui/CustomButton';
 
-export const FlickPoundCollection = ({ config }: FLickButtonProps) => {
+export const FlickPound = ({ config }: FLickPoundButtonProps) => {
   const { onError, onSuccess } = useFlick();
+  const [visible, setVisible] = useState(false);
   const [selectedBank, setSelectedBank] = useState<Bank>();
   const [isLoading, setIsLoading] = useState(false);
   const getAuthorizationLink = useGetAuthorizationLink();
   const [transactionConfirmed, setTransactionConfirmed] = useState('');
 
-  const { data, isLoading: isLoadingSession } = useCreateSession(config);
+  const { data, isLoading: isLoadingSession } = useCreateSession({
+    ...config,
+    currency: 'GBP',
+  });
   const checkTransactionStatus = useCheckTransactionStatus(
     data?.data.data.transactionId,
     isLoading
   );
 
+  console.log('data', data?.data.data);
+
   useEffect(() => {
-    if (data?.data.data.bankList) {
+    if (data?.data.data.bankList && !data.data.data.isFirstTimePayer) {
       setSelectedBank(data?.data?.data.bankList.personalBanks[0]);
     }
   }, [data]);
@@ -50,6 +56,10 @@ export const FlickPoundCollection = ({ config }: FLickButtonProps) => {
   }, [checkTransactionStatus.data]);
 
   const completeTransaction = async () => {
+    if (!selectedBank) {
+      setVisible(true);
+      return;
+    }
     setIsLoading(true);
     try {
       const response: any = await getAuthorizationLink.mutateAsync({
@@ -65,28 +75,33 @@ export const FlickPoundCollection = ({ config }: FLickButtonProps) => {
   };
 
   return (
-    <AppLayout>
+    <AppLayout
+      banks={
+        !data?.data?.data || data?.data?.data?.isFirstTimePayer
+          ? []
+          : data.data.data.bankList.personalBanks.slice(0, 3)
+      }
+    >
       <CustomButton
-        disabled={isLoadingSession || isLoading || !selectedBank}
+        disabled={isLoadingSession || isLoading}
         title={
           transactionConfirmed.length > 0
             ? transactionConfirmed
-            : `Pay ${formatAmount(config.amount / 100, config.currency)}`
+            : `Pay ${formatAmount(config.amount / 100, 'GBP')}`
         }
         onPress={completeTransaction}
         isLoading={isLoading || isLoadingSession}
       />
-      {selectedBank &&
-        !isLoadingSession &&
-        data?.data &&
-        transactionConfirmed.length === 0 && (
-          <BankSelector
-            disabled={isLoading || transactionConfirmed.length > 0}
-            selectedBank={selectedBank}
-            bankList={data?.data.data.bankList}
-            setSelectedBank={setSelectedBank}
-          />
-        )}
+      {!isLoadingSession && data?.data && transactionConfirmed.length === 0 && (
+        <BankSelector
+          disabled={isLoading || transactionConfirmed.length > 0}
+          selectedBank={selectedBank}
+          bankList={data?.data.data.bankList}
+          setSelectedBank={setSelectedBank}
+          visible={visible}
+          setVisible={setVisible}
+        />
+      )}
     </AppLayout>
   );
 };

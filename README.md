@@ -2,15 +2,6 @@
 
 A powerful and secure payment SDK for React Native applications that enables seamless integration of payment processing capabilities.
 
-## Features
-
-- Secure payment processing
-- Support for multiple currencies
-- Easy integration with React Native applications
-- Production and sandbox environments
-- Comprehensive error handling
-- TypeScript support
-
 ## Installation
 
 ```sh
@@ -21,13 +12,14 @@ npm install react-native-flick-react-native-sdk
 
 ### Basic Implementation
 
-```jsx
-import {
-  FlickProvider,
-  FlickPoundCollection,
-} from 'react-native-flick-react-native-sdk';
+#### Using FlickEuro Component
 
-function PaymentScreen() {
+#### Using FlickPound Component
+
+```jsx
+import { FlickProvider, FlickPound } from 'react-native-flick-react-native-sdk';
+
+function PoundPaymentScreen() {
   const handleError = (error) => {
     console.error('Payment Error:', error);
   };
@@ -43,11 +35,11 @@ function PaymentScreen() {
       onError={handleError}
       onSuccess={handleSuccess}
     >
-      <FlickPoundCollection
+      <FlickPound
         config={{
-          amount: 500,
-          currency: 'GBP',
+          amount: 500, // Amount in pence
           cust_email: 'customer@example.com',
+          currency: 'GBP',
         }}
       />
     </FlickProvider>
@@ -57,15 +49,25 @@ function PaymentScreen() {
 
 ### Configuration Options
 
+#### FlickProvider Props
+
 | Prop        | Type                      | Required | Description                         |
 | ----------- | ------------------------- | -------- | ----------------------------------- |
 | environment | 'production' \| 'sandbox' | Yes      | The environment to use for payments |
 | apiKey      | string                    | Yes      | Your Flick API key                  |
 | onError     | function                  | Yes      | Callback for payment errors         |
 | onSuccess   | function                  | Yes      | Callback for successful payments    |
-| amount      | number                    | Yes      | Payment amount                      |
-| currency    | string                    | Yes      | Payment currency (e.g., 'GBP')      |
-| cust_email  | string                    | Yes      | Customer email address              |
+
+#### FlickPound Props
+
+| Prop       | Type   | Required | Description             |
+| ---------- | ------ | -------- | ----------------------- |
+| amount     | number | Yes      | Payment amount in pence |
+| cust_email | string | Yes      | Customer email address  |
+
+#### Minimum Amounts
+
+- GBP: Minimum 5.00 GBP (500 pence)
 
 ## License
 
