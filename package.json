@@ -1,5 +1,5 @@
 {
-  "name": "getflick/react-native-sdk",
+  "name": "@getflick-react-native",
   "version": "0.1.0",
   "description": "A payment sdk for react native",
   "private": false,
