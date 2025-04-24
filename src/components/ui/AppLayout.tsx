@@ -27,7 +27,6 @@ const AppLayout = ({
                 source={{ uri: item.media[1]?.source }}
                 style={styles.securityIcon}
                 resizeMode="contain"
-                onPress={() => setSelectedBank(item)}
               />
             </TouchableOpacity>
           ))}
