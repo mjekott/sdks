@@ -1,16 +1,87 @@
 # Flick Payment SDK for React Native
 
-A powerful and secure payment SDK for React Native applications that enables seamless integration of payment processing capabilities.
+A powerful and secure payment SDK for React Native applications that enables seamless integration of payment processing capabilities. This SDK provides a simple way to implement payment processing in your React Native applications with support for both GBP and EUR currencies.
+
+## Features
+
+- 🔒 Secure payment processing
+- 💰 Support for GBP and EUR currencies
+- 🌍 Multi-country support for European payments
+- 🎯 Simple and intuitive API
+- ⚡ Real-time payment status updates
+- 🔄 Automatic validation and error handling
+- 📱 Native UI components
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic Implementation](#basic-implementation)
+  - [Configuration Options](#configuration-options)
+  - [Validation Rules](#validation-rules)
+- [Troubleshooting](#troubleshooting)
+- [Support](#support)
+- [License](#license)
 
 ## Installation
 
 ```sh
+# Using npm
 npm install react-native-flick-react-native-sdk
+
+# Using yarn
+yarn add react-native-flick-react-native-sdk
+```
+
+After installation, you'll need to link the native dependencies:
+
+```sh
+# For iOS
+cd ios && pod install && cd ..
+
+# For Android
+# No additional steps required
 ```
 
 ## Usage
 
 ### Basic Implementation
+
+#### Using FlickPound Component
+
+```jsx
+import { FlickProvider, FlickPound } from 'react-native-flick-react-native-sdk';
+
+function PoundPaymentScreen() {
+  const handleError = (error) => {
+    console.error('Payment Error:', error);
+    // Handle error appropriately
+  };
+
+  const handleSuccess = (data) => {
+    console.log('Payment Success:', data);
+    // Handle successful payment
+  };
+
+  return (
+    <FlickProvider
+      environment="production"
+      apiKey="YOUR_API_KEY"
+      onError={handleError}
+      onSuccess={handleSuccess}
+    >
+      <FlickPound
+        config={{
+          amount: 500, // Amount in pence
+          cust_email: 'customer@example.com',
+          currency: 'GBP',
+          redirectUrl: 'payer://confirm-send',
+        }}
+      />
+    </FlickProvider>
+  );
+}
+```
 
 #### Using FlickEuro Component
 
@@ -37,42 +108,9 @@ function EuroPaymentScreen() {
         config={{
           amount: 1000, // Amount in cents
           cust_email: 'customer@example.com',
-          country: 'DE', // Required for EUR payments
-          iban: 'DE89370400440532013000', // Required for EUR payments
-          full_name: 'John Doe', // Required for EUR payments
-        }}
-      />
-    </FlickProvider>
-  );
-}
-```
-
-#### Using FlickPound Component
-
-```jsx
-import { FlickProvider, FlickPound } from 'react-native-flick-react-native-sdk';
-
-function PoundPaymentScreen() {
-  const handleError = (error) => {
-    console.error('Payment Error:', error);
-  };
-
-  const handleSuccess = (data) => {
-    console.log('Payment Success:', data);
-  };
-
-  return (
-    <FlickProvider
-      environment="production"
-      apiKey="YOUR_API_KEY"
-      onError={handleError}
-      onSuccess={handleSuccess}
-    >
-      <FlickPound
-        config={{
-          amount: 500, // Amount in pence
-          cust_email: 'customer@example.com',
-          currency: 'GBP',
+          country: 'DE',
+          iban: 'DE89370400440532013000',
+          full_name: 'John Doe',
         }}
       />
     </FlickProvider>
@@ -103,10 +141,11 @@ function PoundPaymentScreen() {
 
 #### FlickPound Props
 
-| Prop       | Type   | Required | Description             |
-| ---------- | ------ | -------- | ----------------------- |
-| amount     | number | Yes      | Payment amount in pence |
-| cust_email | string | Yes      | Customer email address  |
+| Prop        | Type   | Required | Description                      |
+| ----------- | ------ | -------- | -------------------------------- |
+| amount      | number | Yes      | Payment amount in pence          |
+| cust_email  | string | Yes      | Customer email address           |
+| redirectUrl | string | No       | Redirect url after authorization |
 
 ### Validation Rules
 
@@ -129,6 +168,35 @@ The SDK will automatically validate the payment configuration and return appropr
 - Unsupported country-currency combination
 - Missing required fields
 - Invalid format for IBAN, sort code, or account number
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Payment Fails to Process**
+
+   - Verify your API key is correct
+   - Check if the amount meets minimum requirements
+   - Ensure all required fields are provided
+
+2. **Component Not Rendering**
+
+   - Verify the SDK is properly installed
+   - Check for any console errors
+   - Ensure you're using the correct environment
+
+3. **Validation Errors**
+   - Double-check all input values
+   - Verify currency and country combinations
+   - Ensure IBAN format is correct
+
+## Support
+
+For support, please:
+
+1. Check the [documentation](https://docs.flick.com)
+2. Open an issue on our [GitHub repository](https://github.com/flick/react-native-sdk)
+3. Contact our support team at support@flick.com
 
 ## License
 
