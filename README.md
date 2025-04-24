@@ -5,7 +5,7 @@ A powerful and secure payment SDK for React Native applications that enables sea
 ## Installation
 
 ```sh
-npm install react-native-flick-react-native-sdk
+npm install getflick-react-native
 ```
 
 ## Usage
