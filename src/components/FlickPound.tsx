@@ -27,8 +27,6 @@ export const FlickPound = ({ config }: FLickPoundButtonProps) => {
     isLoading
   );
 
-  console.log('data', data?.data.data);
-
   useEffect(() => {
     if (data?.data.data.bankList && !data.data.data.isFirstTimePayer) {
       setSelectedBank(data?.data?.data.bankList.personalBanks[0]);

@@ -5,7 +5,7 @@ export default function App() {
     console.log(error);
   };
 
-  const handleSuccess = (data: any) => {
+  const handleSuccess = (data: Transac) => {
     console.log(data);
   };
 
@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'center',
+    paddingHorizontal: 16,
   },
 });
