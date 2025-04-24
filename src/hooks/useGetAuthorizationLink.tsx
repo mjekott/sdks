@@ -10,7 +10,6 @@ const useGetAuthorizationLink = () => {
   const { onError } = useFlick();
   return useMutation({
     mutationFn: async (payload: InitiatePaymentAuth) => {
-      console.log('payload', payload);
       return httpClient.post<InitiatePaymentAuthResponse>(
         '/global-payment/europe/create-payment-authorization',
         payload

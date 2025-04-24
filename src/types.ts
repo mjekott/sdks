@@ -16,6 +16,7 @@ export type InitiateCheckout = {
 export type InitiateCheckoutPound = {
   amount: number;
   cust_email: string;
+  redirectUrl?: string;
 };
 
 export type InitiateCheckoutEuro = {

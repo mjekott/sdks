@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native';
-import { FlickPound, FlickProvider } from 'react-native-flick-react-native-sdk';
+import { FlickPound, FlickProvider, type TransactionData } from 'react-native-flick-react-native-sdk';
 export default function App() {
   const handleError = (error: any) => {
     console.log(error);
   };
 
-  const handleSuccess = (data: Transac) => {
+  const handleSuccess = (data: TransactionData) => {
     console.log(data);
   };
 

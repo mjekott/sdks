@@ -1,14 +1,16 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import type { Bank } from '../../types';
 import { Footer } from './Footer';
 
 const AppLayout = ({
   children,
   banks,
+  setSelectedBank,
 }: {
   children: React.ReactNode;
   banks: Bank[];
+  setSelectedBank: (bank: Bank) => void;
 }) => {
   return (
     <View style={styles.container}>
@@ -16,11 +18,18 @@ const AppLayout = ({
         <Text style={styles.headerTitle}>Pay by Bank</Text>
         <View style={styles.securityIcons}>
           {banks.map((item) => (
-            <Image
+            <TouchableOpacity
               key={item.id}
-              source={{ uri: item.media[0]?.source }}
-              style={styles.securityIcon}
-            />
+              onPress={() => setSelectedBank(item)}
+            >
+              <Image
+                key={item.id}
+                source={{ uri: item.media[1]?.source }}
+                style={styles.securityIcon}
+                resizeMode="contain"
+                onPress={() => setSelectedBank(item)}
+              />
+            </TouchableOpacity>
           ))}
         </View>
       </View>

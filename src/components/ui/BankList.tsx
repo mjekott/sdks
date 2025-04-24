@@ -47,7 +47,7 @@ export const BankSelector = ({
           disabled={disabled}
         >
           <Image
-            source={{ uri: selectedBank.media[0]?.source }}
+            source={{ uri: selectedBank.media[1]?.source }}
             style={styles.bankLogo}
           />
           <Image
@@ -170,16 +170,16 @@ const BanksList = ({
 }) => (
   <FlatList
     data={banks}
-    keyExtractor={(item) => item.id}
+    keyExtractor={(item: Bank) => item.id}
     numColumns={3}
     contentContainerStyle={styles.bankRow}
     columnWrapperStyle={{ gap: 4 }}
-    renderItem={({ item }) => (
+    renderItem={({ item }: { item: Bank }) => (
       <TouchableOpacity
         style={[
           styles.bankCard,
           selectedBank?.id === item.id && styles.selectedBankCard,
-          { width: '33.33%' },
+          { width: '32%' },
         ]}
         onPress={() => onBankSelect(item)}
       >
@@ -290,7 +290,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     height: SCREEN_HEIGHT * 0.7,
-    paddingVertical: 24,
+    paddingTop: 24,
+
     paddingHorizontal: 20,
   },
   bottomSheetContent: {
@@ -377,7 +378,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 10,
     gap: 4,
   },
   findMoreButton: {

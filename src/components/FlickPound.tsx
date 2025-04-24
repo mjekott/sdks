@@ -79,6 +79,7 @@ export const FlickPound = ({ config }: FLickPoundButtonProps) => {
           ? []
           : data.data.data.bankList.personalBanks.slice(0, 3)
       }
+      setSelectedBank={setSelectedBank}
     >
       <CustomButton
         disabled={isLoadingSession || isLoading}
