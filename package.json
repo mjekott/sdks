@@ -1,6 +1,6 @@
 {
   "name": "getflick-react-native",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A payment sdk for react native",
   "private": false,
   "source": "./src/index.ts",
