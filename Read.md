@@ -83,40 +83,8 @@ function PoundPaymentScreen() {
 }
 ```
 
-#### Using FlickEuro Component
 
-```jsx
-import { FlickProvider, FlickEuro } from 'react-native-flick-react-native-sdk';
 
-function EuroPaymentScreen() {
-  const handleError = (error) => {
-    console.error('Payment Error:', error);
-  };
-
-  const handleSuccess = (data) => {
-    console.log('Payment Success:', data);
-  };
-
-  return (
-    <FlickProvider
-      environment="production"
-      apiKey="YOUR_API_KEY"
-      onError={handleError}
-      onSuccess={handleSuccess}
-    >
-      <FlickEuro
-        config={{
-          amount: 1000, // Amount in cents
-          cust_email: 'customer@example.com',
-          country: 'DE',
-          iban: 'DE89370400440532013000',
-          full_name: 'John Doe',
-        }}
-      />
-    </FlickProvider>
-  );
-}
-```
 
 ### Configuration Options
 
@@ -129,15 +97,6 @@ function EuroPaymentScreen() {
 | onError     | function                  | Yes      | Callback for payment errors         |
 | onSuccess   | function                  | Yes      | Callback for successful payments    |
 
-#### FlickEuro Props
-
-| Prop       | Type   | Required | Description                     |
-| ---------- | ------ | -------- | ------------------------------- |
-| amount     | number | Yes      | Payment amount in cents         |
-| cust_email | string | Yes      | Customer email address          |
-| country    | string | Yes      | Country code (e.g., 'DE', 'FR') |
-| iban       | string | Yes      | Customer's IBAN                 |
-| full_name  | string | Yes      | Customer's full name            |
 
 #### FlickPound Props
 
@@ -147,7 +106,6 @@ function EuroPaymentScreen() {
 | cust_email  | string | Yes      | Customer email address           |
 | redirectUrl | string | No       | Redirect url after authorization |
 
-### Validation Rules
 
 #### Minimum Amounts
 

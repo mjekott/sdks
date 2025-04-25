@@ -185,7 +185,7 @@ const BanksList = ({
       >
         <Image
           source={{ uri: item.media[1]?.source }}
-          style={{ width: 40, height: 40, borderRadius: '100%' }}
+          style={{ width: 40, height: 40, borderRadius: 100 }}
           resizeMode="contain"
         />
         <Text style={styles.bankName} numberOfLines={1}>

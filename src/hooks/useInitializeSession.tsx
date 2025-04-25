@@ -18,7 +18,7 @@ const useCreateSession = (
     queryFn: async () => {
       try {
         const response = await httpClient.post<CheckoutResponse>(
-          `/global-payment/europe/create-authentication-session`,
+          `/create-authentication-session`,
           { ...data, amount: String(data.amount) }
         );
         return response;

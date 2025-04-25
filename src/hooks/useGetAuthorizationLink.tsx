@@ -11,7 +11,7 @@ const useGetAuthorizationLink = () => {
   return useMutation({
     mutationFn: async (payload: InitiatePaymentAuth) => {
       return httpClient.post<InitiatePaymentAuthResponse>(
-        '/global-payment/europe/create-payment-authorization',
+        '/create-payment-authorization',
         payload
       );
     },

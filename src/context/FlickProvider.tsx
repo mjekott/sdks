@@ -19,7 +19,7 @@ const FlickContext = createContext<PaymentProviderConfig | null>(null);
 
 export type FlickProviderProps = {
   children: React.ReactNode;
-  environment: 'production';
+  environment: 'production' | 'sandbox';
   apiKey: string;
   onError?: (error: Error) => void;
   onSuccess?: (data: any) => void;
@@ -28,10 +28,15 @@ export type FlickProviderProps = {
 export const FlickProvider = ({
   children,
   apiKey,
+  environment,
   onError,
   onSuccess,
 }: FlickProviderProps) => {
   httpClient.defaults.headers.authorization = `Bearer ${apiKey}`;
+  httpClient.defaults.baseURL =
+    environment === 'production'
+      ? 'https://1mgy6330f9.execute-api.us-east-2.amazonaws.com/production//global-payment/europe'
+      : 'https://1mgy6330f9.execute-api.us-east-2.amazonaws.com/production//global-payment/europe/sandbox';
 
   const value = useMemo(
     () => ({

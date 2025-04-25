@@ -22,6 +22,7 @@ export const FlickPound = ({ config }: FLickPoundButtonProps) => {
     ...config,
     currency: 'GBP',
   });
+
   const checkTransactionStatus = useCheckTransactionStatus(
     data?.data.data.transactionId,
     isLoading

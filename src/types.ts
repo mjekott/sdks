@@ -256,3 +256,9 @@ export interface ConfirmTransactionResponse {
     data: TransactionData;
   };
 }
+
+export type PaymentProviderConfig = {
+  onError?: (error: Error) => void;
+  onSuccess?: (data: any) => void;
+  environment: 'production' | 'sandbox';
+};

@@ -10,7 +10,7 @@ const useCheckTransactionStatus = (
     queryKey: ['transaction-status', transactionId],
     queryFn: async () =>
       httpClient.get<ConfirmTransactionResponse>(
-        `/global-payment/europe/query-status?transactionId=${transactionId}`
+        `/query-status?transactionId=${transactionId}`
       ),
     refetchInterval: 8000,
     enabled: !!transactionId && enabled,
