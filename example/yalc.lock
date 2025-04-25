@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "getflick-react-native": {
+      "signature": "cf182fd58034c33b13ab89d16d0557c4",
+      "file": true
+    }
+  }
+}
