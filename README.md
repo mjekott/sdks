@@ -15,7 +15,7 @@ npm install getflick-react-native
 #### Using FlickPound Component
 
 ```jsx
-import { FlickProvider, FlickPound } from 'react-native-flick-react-native-sdk';
+import { FlickProvider, FlickPound } from 'getflick-react-native';
 
 function PoundPaymentScreen() {
   const handleError = (error) => {
